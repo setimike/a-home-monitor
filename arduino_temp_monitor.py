@@ -45,7 +45,7 @@ while True:
 		while curMinute == runMinute:
 			curMinute = time.localtime()[4]
 			rawrow = ser.readline()
-			f.write(rawrow)
+#			f.write(rawrow)
 			tmprow = rawrow.split(',')
 			# process read line into data:
 			try:
@@ -76,6 +76,8 @@ while True:
 			curMotion = runMotion
 			changed = 1
 		if changed:
+			csvrow = "%02d:%02d, %s" % (curHour, curMinute, rawrow)
+			f.write(csvrow)
 			tempPage = weatherPage % (curHour, curMinute,curTempF,curHumidity, lastMotion, curLight)
 			print "Time %d:%02d" % (curHour, curMinute)
 			print "Temperature: %s" % (curTempF)
